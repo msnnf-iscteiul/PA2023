@@ -36,13 +36,37 @@ You can create arrays of simple values or complex objects with properties.
     json.addProperty("inscritos", inscritosArray)
     json.addProperty("cursos", cursosArray)
     
-Both data classes are Visitable.
+Both data classes are Visitable and have 4 functions SearchPropertyNameValues, SearchPropertyNameObjects, VerifyStructure and CreateJson.
 
     interface Visitable {
       fun acceptCreateJson(visitor: JsonVisitor)
       fun acceptSearchPropertyNameValues(propertyName: String, visitor: JsonVisitor)
       fun acceptSearchPropertyNameObjects(propertyNames: List<String>, visitor: JsonVisitor)
       fun acceptVerifyStructure(propertyName: String, visitor: JsonVisitor)
+    }
+    
+    data class JSONObject(
+        var fields: MutableList<Pair<String, Any>> = mutableListOf(),
+    ) : Visitable {
+        fun addProperty(name: String, value: Any?) {
+            fields.add(Pair(name, value) as Pair<String, Any>)
+    }
+        override fun acceptCreateJson(visitor: JsonVisitor) = visitor.visitCreateJson(this)
+        override fun acceptSearchPropertyNameValues(propertyName: String, visitor: JsonVisitor) = visitor.visitSearchPropertyNameValues(propertyName, this)
+        override fun acceptSearchPropertyNameObjects(propertyNames: List<String>, visitor: JsonVisitor) = visitor.visitSearchPropertyNameObjects(propertyNames, this)
+        override fun acceptVerifyStructure(propertyName: String, visitor: JsonVisitor) = visitor.visitVerifyStructure(propertyName, this)
+    }
+
+    data class JSONArray(
+        var fields: MutableList<Any> = mutableListOf(),
+    ): Visitable {
+        fun add(value: Any) {
+            fields.add(value)
+    }
+        override fun acceptCreateJson(visitor: JsonVisitor) = visitor.visitCreateJson(this)
+        override fun acceptSearchPropertyNameValues(propertyName: String, visitor: JsonVisitor) = visitor.visitSearchPropertyNameValues(propertyName, this)
+        override fun acceptSearchPropertyNameObjects(propertyNames: List<String>, visitor: JsonVisitor) = visitor.visitSearchPropertyNameObjects(propertyNames, this)
+        override fun acceptVerifyStructure(propertyName: String, visitor: JsonVisitor) = visitor.visitVerifyStructure(propertyName, this)
     }
     
 SearchPropertyNameValues accepts propertyName and JSONObject. 
