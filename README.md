@@ -1,6 +1,8 @@
 # PA2023 JSON Project Editor and Graphic Interface 
 
-Data class JSONObject has addProperty(propertyName as String, value as Any). 
+![image](https://github.com/msnnf-iscteiul/PA2023/assets/56412586/65d8bfb1-c9ca-4e3e-a69e-64f01fa33bb3)
+    
+Data class JSONObject has addProperty(propertyName as String, value as Any).
 Data class JSONArray has add(value as Any). 
 You can create arrays of simple values or complex objects with properties. 
 
