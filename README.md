@@ -1,8 +1,8 @@
 # PA2023 JSON Project Editor and Graphic Interface 
 
-Data class JSONObject has addProperty(propertyName as String, value as Any)
-Data class JSONArray has add(value as Any)
-You can create arrays of simple values or complex objects with properties
+Data class JSONObject has addProperty(propertyName as String, value as Any). 
+Data class JSONArray has add(value as Any). 
+You can create arrays of simple values or complex objects with properties. 
 
     val aluno1 = JSONObject()
     aluno1.addProperty("numero", 101101)
@@ -34,7 +34,7 @@ You can create arrays of simple values or complex objects with properties
     json.addProperty("inscritos", inscritosArray)
     json.addProperty("cursos", cursosArray)
     
-Both data classes are Visitable   
+Both data classes are Visitable.
 
     interface Visitable {
       fun acceptCreateJson(visitor: JsonVisitor)
@@ -43,26 +43,26 @@ Both data classes are Visitable
       fun acceptVerifyStructure(propertyName: String, visitor: JsonVisitor)
     }
     
-SearchPropertyNameValues accepts propertyName and JSONObject
-Returns a list of values of the properties with that propertyName
+SearchPropertyNameValues accepts propertyName and JSONObject. 
+Returns a list of values of the properties with that propertyName. 
 
     val expected = listOf(101101, 101102, 26503)
     Assertions.assertEquals(expected, searchPropertyNameValues("numero", json))
     
-SearchPropertyNameObjects accepts list of propertyNames and JSONObject
-Returns a list of JSONObjects that contain all the propertyNames
+SearchPropertyNameObjects accepts list of propertyNames and JSONObject. 
+Returns a list of JSONObjects that contain all the propertyNames. 
 
     val expected = listOf(aluno1, aluno2, aluno3)
     Assertions.assertEquals(expected, searchPropertyNameObjects(listOf("numero", "nome"), json))
     
-VerifyStructure accepts propertyName and JSONObject
-Returns a boolean, true if every property with that propertyName has same structure (all Int or all String)
+VerifyStructure accepts propertyName and JSONObject. 
+Returns a boolean, true if every property with that propertyName has same structure (all Int or all String). 
 
     Assertions.assertTrue(verifyStructure("numero", json))
     Assertions.assertTrue(verifyStructure("inscritos", json))
     
-CreateJson aceepts JSONObject
-Returns a string with JSONObject transformed into a JSON
+CreateJson aceepts JSONObject. 
+Returns a string with JSONObject transformed into a JSON. 
 
     Assertions.assertEquals(expected, createJson(json))
     
