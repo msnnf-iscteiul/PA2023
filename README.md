@@ -1,7 +1,7 @@
 # PA2023 JSON Project Editor and Graphic Interface 
 
-data class JSONObject has addProperty(propertyName as String, value as Any)
-data class JSONArray has add(value as Any)
+Data class JSONObject has addProperty(propertyName as String, value as Any)
+Data class JSONArray has add(value as Any)
 You can create arrays of simple values or complex objects with properties
 
     val aluno1 = JSONObject()
